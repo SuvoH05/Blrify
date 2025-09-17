@@ -1,0 +1,47 @@
+<!-- popup.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Misinfo Guardian</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Misinfo Guardian</h2>
+
+    <label class="field">
+      <input type="checkbox" id="use_api" />
+      Use Hugging Face API
+    </label>
+
+    <label class="field">
+      <div>Hugging Face Token</div>
+      <input id="hf_token" placeholder="hf_xxx (optional for demo)" />
+    </label>
+
+    <label class="field">
+      Confidence threshold: <span id="th_val">0.70</span>
+      <input id="threshold" type="range" min="0.1" max="0.95" step="0.05" value="0.7" />
+    </label>
+
+    <div class="field categories">
+      <div>Enabled categories</div>
+      <label><input type="checkbox" data-cat="misinformation" /> Misinformation</label>
+      <label><input type="checkbox" data-cat="violence" /> Violence</label>
+      <label><input type="checkbox" data-cat="sexual" /> Sexual</label>
+      <label><input type="checkbox" data-cat="politics" /> Politics</label>
+      <label><input type="checkbox" data-cat="family-restricted" /> Family Restricted</label>
+    </div>
+
+    <div class="actions">
+      <button id="saveBtn">Save</button>
+      <button id="clearCacheBtn">Clear Cache</button>
+    </div>
+
+    <small class="note">Tip: For demo, you don't need an API token — local keyword fallback will run. Add HF token for better classification.</small>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
