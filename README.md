@@ -57,15 +57,15 @@ chrome-extension/
 1. Clone this repo:  
    ```bash
    git clone https://github.com/your-username/safesurf-extension.git
-````
-
+```
+```
 2. Create a `config.js` in the root directory:
 
-   ```js
+   
    const CONFIG = {
      PERSPECTIVE_API_KEY: "YOUR_API_KEY_HERE"
    };
-   ```
+   
 
 3. Load the extension into Chrome:
 
@@ -95,22 +95,6 @@ chrome-extension/
 
 ## 🧑‍💻 Contributors
 
-* \[Your Name]
-* \[Team Member(s)]
+* \[Suvojoti Howlader]
+* \[Team Member(s):]
 
----
-
-## 📜 License
-
-MIT License – free to use and modify.
-
----
-
-> ⚡ Built with ❤️ for **Gen AI Exchange Hackathon 2025**.
-
-```
-
----
-
-👉 Do you want me to also **generate a small GIF/diagram** (like the flow you saw earlier: feed → API → blur) so you can drop that under the “Overview” section in your README?
-```
