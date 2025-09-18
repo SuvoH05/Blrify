@@ -1,0 +1,60 @@
+/* popup.css */
+:root {
+  font-family: Inter, Roboto, Arial, sans-serif;
+  font-size: 13px;
+}
+
+body {
+  margin: 0;
+  padding: 12px;
+  width: 320px;
+  color: #111;
+}
+
+.container h2 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+}
+
+.field {
+  margin: 8px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field input[type="text"],
+.field input[type="password"],
+#hf_token {
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  width: 100%;
+}
+
+.categories label {
+  display: block;
+  margin: 4px 0;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.actions button {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  background: #1677ff;
+  color: white;
+}
+
+.note {
+  display: block;
+  margin-top: 10px;
+  color: #666;
+  font-size: 11px;
+}
