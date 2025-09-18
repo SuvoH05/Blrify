@@ -58,7 +58,6 @@ chrome-extension/
    ```bash
    git clone https://github.com/your-username/safesurf-extension.git
 ```
-```
 2. Create a `config.js` in the root directory:
 
    
