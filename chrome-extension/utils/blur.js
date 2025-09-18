@@ -2,7 +2,7 @@
 
 function blurElement(el, label, score) {
   el.style.transition = 'filter 250ms ease';
-  el.style.filter = 'blur(8px) grayscale(40%)';
+  el.style.filter = 'blur(45px) grayscale(40%)';
   el.style.pointerEvents = 'none';
 
   let overlay = el.querySelector('.misinfo-guardian-overlay');
@@ -19,7 +19,7 @@ function blurElement(el, label, score) {
     Object.assign(overlay.style, {
       position: 'absolute',
       inset: '0',
-      background: 'rgba(0,0,0,0.4)',
+      background: 'rgba(0, 0, 0, 0.9)',
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',

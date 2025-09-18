@@ -24,7 +24,7 @@
   "content_scripts": [
     {
       "matches": ["*://twitter.com/*", "*://x.com/*"],
-      "js": ["content.js"],
+      "js": ["utils/blur.js","content.js"],
       "run_at": "document_idle"
     }
   ],

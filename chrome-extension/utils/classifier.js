@@ -1,6 +1,6 @@
 // utils/classifier.js
 
-const API_KEY = "YOUR_API_KEY_HERE";  
+const API_KEY = CONFIG.PERSPECTIVE_API_KEY;  
 const API_URL = "https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=" + API_KEY;
 
 async function classifyText(text) {
