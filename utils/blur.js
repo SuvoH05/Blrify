@@ -42,8 +42,37 @@ function muteMedia(el) {
   vids.forEach(v => { v.muted = true; });
 }
 
+function unblurAll() {
+  // Remove all blur overlays
+  const overlays = document.querySelectorAll('.misinfo-guardian-overlay');
+  overlays.forEach(overlay => {
+    const parent = overlay.parentElement;
+    if (parent) {
+      parent.style.filter = '';
+      parent.style.pointerEvents = '';
+    }
+    overlay.remove();
+  });
+  
+  // Also remove any inline blur styles that might exist
+  const blurredElements = document.querySelectorAll('[style*="blur"]');
+  blurredElements.forEach(element => {
+    if (element.style.filter && element.style.filter.includes('blur')) {
+      element.style.filter = element.style.filter.replace(/blur\([^)]*\)/g, '').trim();
+      if (!element.style.filter) {
+        element.style.removeProperty('filter');
+      }
+    }
+    if (element.style.pointerEvents === 'none') {
+      element.style.removeProperty('pointerEvents');
+    }
+  });
+  
+  console.log("[MGBlur] Unblurred all content");
+}
+
 if (typeof window !== 'undefined') {
-  window.MGBlur = { blurElement, muteMedia };
+  window.MGBlur = { blurElement, muteMedia, unblurAll };
 } else if (typeof self !== 'undefined') {
-  self.MGBlur = { blurElement, muteMedia };
+  self.MGBlur = { blurElement, muteMedia, unblurAll };
 }

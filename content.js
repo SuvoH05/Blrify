@@ -2,7 +2,7 @@
 // Replace your current content.js with this file.
 
 // ---- Config ----
-const DEFAULT_THRESHOLD = 0.75; // default toxicity threshold to blur
+const DEFAULT_THRESHOLD = 0.4; // default toxicity threshold to blur
 const SELECTOR = "article div[data-testid='tweetText']"; // X/Twitter selector
 
 console.log("[MG] content script loaded");
@@ -37,6 +37,24 @@ function getThreshold() {
   });
 }
 
+// Check if extension is enabled (returns a Promise)
+function getExtensionEnabled() {
+  return new Promise(resolve => {
+    try {
+      chrome.storage.sync.get({ extensionEnabled: true }, (res) => {
+        if (chrome.runtime.lastError) {
+          console.warn("[MG] storage.get error:", chrome.runtime.lastError);
+          resolve(true); // default to enabled
+        } else {
+          resolve(res.extensionEnabled !== false); // default to true
+        }
+      });
+    } catch (e) {
+      resolve(true); // default to enabled
+    }
+  });
+}
+
 // Wrapper to call background classifier and return a Promise
 function classifyViaBackground(text) {
   return new Promise((resolve) => {
@@ -54,6 +72,13 @@ function classifyViaBackground(text) {
 
 // Main scanner for posts/tweets
 async function scanAndProcessOnce() {
+  // First check if extension is enabled
+  const isEnabled = await getExtensionEnabled();
+  if (!isEnabled) {
+    console.log("[MG] Extension is disabled, skipping scan");
+    return; // Exit early if extension is turned off
+  }
+
   const threshold = await getThreshold();
   const nodes = Array.from(document.querySelectorAll(SELECTOR));
 
@@ -117,8 +142,6 @@ async function scanAndProcessOnce() {
         console.error("[MG] error while blurring:", err);
       }
     } else {
-      // debug: show scores if you want (commented out)
-      // console.log("[MG] no labels above threshold. resp.labels:", resp.labels);
     }
   }
 }
@@ -136,3 +159,55 @@ observer.observe(document.body, { childList: true, subtree: true });
 // run initial scans
 scanAndProcessOnce().catch(e => console.error("[MG] initial scan error:", e));
 setInterval(() => scanAndProcessOnce().catch(e => console.error("[MG] periodic scan error:", e)), 4000);
+
+// Listen for settings updates from popup
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'settingsUpdated') {
+    console.log("[MG] Settings updated:", message.settings);
+    
+    // If extension was just turned off, we could optionally un-blur content
+    if (!message.settings.extensionEnabled) {
+      console.log("[MG] Extension turned OFF - stopping scans");
+      // Optionally un-blur previously blurred content
+      unblurAllContent();
+    } else {
+      console.log("[MG] Extension turned ON - resuming scans");
+      // Trigger a fresh scan
+      scanAndProcessOnce().catch(e => console.error("[MG] settings update scan error:", e));
+    }
+  }
+  
+  if (message.action === 'cacheCleared') {
+    console.log("[MG] Cache cleared");
+  }
+});
+
+// Function to remove blur from all previously blurred content
+function unblurAllContent() {
+  try {
+    // Find all elements that might have been blurred
+    const blurredElements = document.querySelectorAll('[style*="blur"]');
+    blurredElements.forEach(element => {
+      // Remove blur filter
+      if (element.style.filter && element.style.filter.includes('blur')) {
+        element.style.filter = element.style.filter.replace(/blur\([^)]*\)/g, '').trim();
+        if (!element.style.filter) {
+          element.style.removeProperty('filter');
+        }
+      }
+      // Remove title attribute that shows blur reason
+      if (element.title && element.title.includes('Hidden:')) {
+        element.removeAttribute('title');
+      }
+    });
+    
+    // Also try to find elements blurred by the blur utility if it exists
+    if (window.MGBlur && typeof window.MGBlur.unblurAll === "function") {
+      window.MGBlur.unblurAll();
+    }
+    
+    console.log("[MG] Unblurred all content");
+  } catch (err) {
+    console.error("[MG] Error unblurring content:", err);
+  }
+}
