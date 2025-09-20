@@ -1,4 +1,5 @@
 // utils/classifier.js
+import { CONFIG } from './config.js';
 
 const API_KEY = CONFIG.PERSPECTIVE_API_KEY;  
 const API_URL = "https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=" + API_KEY;

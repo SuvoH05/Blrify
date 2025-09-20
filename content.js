@@ -48,6 +48,7 @@ function classifyViaBackground(text) {
       }
       resolve(response || null);
     });
+    
   });
 }
 

@@ -1,4 +1,5 @@
 // background.js (service worker)
+import { CONFIG } from './config.js';
 
 const PERSPECTIVE_API_KEY = CONFIG.PERSPECTIVE_API_KEY;
 const PERSPECTIVE_URL =
