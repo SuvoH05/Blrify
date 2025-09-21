@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "PROFLOW (Hackathon Prototype)",
+  "name": "Blrify",
   "version": "0.1.0",
   "description": "Detects potentially harmful/misinformation content and applies blur + mutes audio. Uses HuggingFace (optional) + fallback keywords.",
   "icons": {
