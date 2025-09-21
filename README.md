@@ -1,10 +1,10 @@
-# 🔒 SafeSurf Extension  
+# 🔒 Blrify Extension  
 *A Chrome extension to make social media safer by blurring harmful content before you see it.*  
 
 ---
 
 ## 🚀 Overview  
-SafeSurf is a browser extension built for the **Gen AI Exchange Hackathon (H2S)**.  
+Blrify is a browser extension built for the **Gen AI Exchange Hackathon (H2S)**.  
 It scans content in real time on platforms like **X (Twitter)** and **Instagram**, detects harmful or toxic language using **Google’s Perspective API**, and applies a **blur filter with an overlay** to protect users.  
 
 Users can still **choose to reveal content** with a single click, ensuring safety without censorship.  
@@ -56,7 +56,7 @@ chrome-extension/
 
 1. Clone this repo:  
    ```bash
-   git clone https://github.com/your-username/safesurf-extension.git
+   git clone https://github.com/your-username/Blrify-extension.git
    ```
 2. Create a `config.js` in the root directory:
 
