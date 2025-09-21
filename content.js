@@ -2,7 +2,7 @@
 // Replace your current content.js with this file.
 
 // ---- Config ----
-const DEFAULT_THRESHOLD = 0.4; // default toxicity threshold to blur
+const DEFAULT_THRESHOLD = 0.75; // default toxicity threshold to blur
 const SELECTOR = "article div[data-testid='tweetText']"; // X/Twitter selector
 
 console.log("[MG] content script loaded");
