@@ -95,5 +95,5 @@ chrome-extension/
 ## 🧑‍💻 Contributors
 
 * \[Suvojoti Howlader]
-* \[Team Member(s):]
+* \[Team Member(s):Tanmoy Das, Subhajit De, Somita Roy, Sambaran Das]
 
